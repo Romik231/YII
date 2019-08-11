@@ -1,7 +1,7 @@
 <?php
 $session = Yii::$app->session;
 $session->open();
-print_r($session);
+
 
 /**
  * @var $model \app\models\Activity
