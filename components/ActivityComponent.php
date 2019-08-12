@@ -15,7 +15,7 @@ class ActivityComponent extends BaseActivityComponent
         return new $this->classModel;
     }
 
-    public function createActivity(Activity &$activity)
+    public function createActivity(Activity &$activity): bool
     {
         if($activity->validate()){
             return true;

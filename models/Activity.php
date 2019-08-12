@@ -15,13 +15,27 @@ class Activity extends BaseActivityModel
     public $endDate;
     public $isBlocked;
     public $isRepeated;
+    public $useNotification;
+
+    public function beforeValidate()
+    {
+        $dateStart=\DateTime::createFromFormat('d.m.Y', $this->startDate);
+        $dateEnd=\DateTime::createFromFormat('d.m.Y', $this->endDate);
+        if($dateStart and $dateEnd){
+            $this->startDate=$dateStart->format('Y-m-d');
+            $this->endDate=$dateEnd->format('Y-m-d');
+        }
+        return parent::beforeValidate();
+    }
 
     public function rules()
     {
         return [
+            ['title', 'trim'],
+            ['description', 'trim'],
             [['title', 'description'],'required'],
-            [['startDate', 'endDate'], 'string'],
-            [['isBlocked', 'isRepeated'],'string'],
+            [['startDate', 'endDate'], 'date', 'format'=>'php:Y-m-d'],
+            [['isBlocked', 'isRepeated', 'useNotification'],'boolean'],
         ];
     }
 
@@ -34,6 +48,7 @@ class Activity extends BaseActivityModel
             'endDate' => 'Окончание события',
             'isBlocked' => 'Запрет на доплнительные события',
             'isRepeated' => 'Повторять событие',
+            'useNotification' => 'Напоминать',
         ];
     }
 }
