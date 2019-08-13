@@ -40,8 +40,12 @@
             'todayHighLite'=>true,
         ]
     ]);?>
+    <?= $form->field($model,'repeatedType')->dropDownList($model::REPEATED_TYPE);?>
     <?= $form->field($model,'isBlocked')->checkbox();?>
     <?= $form->field($model,'isRepeated')->checkbox();?>
+    <?= $form->field($model, 'useNotification')->checkbox();?>
+    <?= $form->field($model, 'email', ['enableAjaxValidation'=>true, 'enableClientValidation'=>false]);?>
+    <?= $form->field($model, 'emailRepeat', ['enableAjaxValidation'=>true, 'enableClientValidation'=>false]);?>
     <div>
         <button class="btn btn-default" type="submit">Отправить</button>
     </div>

@@ -5,6 +5,7 @@ namespace app\models;
 
 
 use app\base\BaseActivityModel;
+use phpDocumentor\Reflection\Types\Self_;
 use yii\base\Model;
 
 class Activity extends BaseActivityModel
@@ -16,6 +17,16 @@ class Activity extends BaseActivityModel
     public $isBlocked;
     public $isRepeated;
     public $useNotification;
+    public $repeatedType;
+    public $email;
+    public $emailRepeat;
+
+    public const REPEATED_TYPE = [
+      1=>'Каждый час',
+      2=>'Каждый день',
+      3=>'Каждую неделю'
+
+    ];
 
     public function beforeValidate()
     {
@@ -33,7 +44,13 @@ class Activity extends BaseActivityModel
         return [
             ['title', 'trim'],
             ['description', 'trim'],
+            ['email', 'email'],
+            ['emailRepeat', 'compare', 'compareAttribute'=>'email'],
+            [['email','emailRepeat'], 'required', 'when' => function($model){
+                return $model->useNotification?true:false;
+            }],
             [['title', 'description'],'required'],
+            ['repeatedType', 'in', 'range'=>array_keys(self::REPEATED_TYPE)],
             [['startDate', 'endDate'], 'date', 'format'=>'php:Y-m-d'],
             [['isBlocked', 'isRepeated', 'useNotification'],'boolean'],
         ];
@@ -49,6 +66,7 @@ class Activity extends BaseActivityModel
             'isBlocked' => 'Запрет на доплнительные события',
             'isRepeated' => 'Повторять событие',
             'useNotification' => 'Напоминать',
+            'repeatedType' => 'Интервал повторений',
         ];
     }
 }
