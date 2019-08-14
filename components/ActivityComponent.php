@@ -19,7 +19,7 @@ class ActivityComponent extends BaseActivityComponent
 
     public function createActivity(Activity &$activity): bool
     {
-        $activity->file=UploadedFile::getInstance($activity, 'file');
+        $activity->file=UploadedFile::getInstances($activity, 'file');
 
         if(!$activity->validate()){
             return false;

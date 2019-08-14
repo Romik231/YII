@@ -46,7 +46,7 @@
     <?= $form->field($model, 'useNotification')->checkbox();?>
     <?= $form->field($model, 'email', ['enableAjaxValidation'=>true, 'enableClientValidation'=>false]);?>
     <?= $form->field($model, 'emailRepeat', ['enableAjaxValidation'=>true, 'enableClientValidation'=>false]);?>
-    <?= $form->field($model,'file')->fileInput();?>
+    <?= $form->field($model,'file[]')->fileInput(['multiple'=>true, 'accept' => 'images/*']);?>
     <div>
         <button class="btn btn-default" type="submit">Отправить</button>
     </div>

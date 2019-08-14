@@ -45,7 +45,7 @@ class Activity extends BaseActivityModel
         return [
             ['title', 'trim'],
             ['description', 'trim'],
-            ['file','file','extensions'=>['jpg','png']],
+            ['file','file','extensions'=>['jpg','png'],'maxFiles' => 3],
             ['email', 'email'],
             ['emailRepeat', 'compare', 'compareAttribute'=>'email'],
             [['email','emailRepeat'], 'required', 'when' => function($model){
