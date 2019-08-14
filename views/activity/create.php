@@ -12,7 +12,7 @@
 <h3>Активность</h3>
 
 <div class="col-md-6">
-    <?php $form = \yii\bootstrap\ActiveForm::begin();?>
+    <?php $form = \yii\bootstrap\ActiveForm::begin(['options'=>['enctype'=>'multipart/form-data']]);?>
 
     <?= $form->field($model,'title');?>
     <?= $form->field($model,'description')->textarea();?>
@@ -46,6 +46,7 @@
     <?= $form->field($model, 'useNotification')->checkbox();?>
     <?= $form->field($model, 'email', ['enableAjaxValidation'=>true, 'enableClientValidation'=>false]);?>
     <?= $form->field($model, 'emailRepeat', ['enableAjaxValidation'=>true, 'enableClientValidation'=>false]);?>
+    <?= $form->field($model,'file')->fileInput();?>
     <div>
         <button class="btn btn-default" type="submit">Отправить</button>
     </div>

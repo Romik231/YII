@@ -20,6 +20,7 @@ class Activity extends BaseActivityModel
     public $repeatedType;
     public $email;
     public $emailRepeat;
+    public $file;
 
     public const REPEATED_TYPE = [
       1=>'Каждый час',
@@ -44,6 +45,7 @@ class Activity extends BaseActivityModel
         return [
             ['title', 'trim'],
             ['description', 'trim'],
+            ['file','file','extensions'=>['jpg','png']],
             ['email', 'email'],
             ['emailRepeat', 'compare', 'compareAttribute'=>'email'],
             [['email','emailRepeat'], 'required', 'when' => function($model){
@@ -67,6 +69,7 @@ class Activity extends BaseActivityModel
             'isRepeated' => 'Повторять событие',
             'useNotification' => 'Напоминать',
             'repeatedType' => 'Интервал повторений',
+            'file' => 'Прикрепить',
         ];
     }
 }

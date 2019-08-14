@@ -29,6 +29,7 @@ class ActivityCreateAction extends BaseActivityAction
         if(\Yii::$app->request->isPost){
 
             if(\Yii::$app->activity->createActivity($model)){
+                return $this->controller->render('info',['model'=>$model]);
 
             }else{
 //                print_r($model->getErrors());
