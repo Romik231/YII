@@ -5,12 +5,51 @@ namespace app\components;
 
 
 use app\models\Users;
-use yii\web\Controller;
+use yii\base\Component;
 
-class AuthComponent extends Controller
+
+class AuthComponent extends Component
 {
-    public function signup(Users &$model): bool
-    {
 
+    public function signin(Users &$model): bool
+    {
+        $model->scenarioSignin();
+        if (!$model->validate(['email', 'password'])){
+            return false;
+        }
+        $user=$this->getUserByEmail($model->email);
+        if ((!$this->validationPassword($user->password, $model->password_hash))){
+            $model->addError('password', 'Wrong password');
+            return false;
+        }
+        return \Yii::$app->user->login($user, 3600);
+
+    }
+
+    public function validationPassword($password, $password_hash):bool{
+        return \Yii::$app->security->validatePassword($password,$password_hash);
+    }
+
+    public function getUserByEmail(string $email): ?Users{
+        return Users::find()->andWhere(['email'=>$email])->one();
+    }
+
+    public function signup(Users &$user): bool
+    {
+        $user->scenarioSignup();
+        if (!$user->validate(['email', 'password'])) {
+            return false;
+        }
+
+        $user->password_hash = $this->genHashPassword($user->password);
+        if (!$user->save()) {
+            return false;
+        }
+        return true;
+    }
+
+    public function genHashPassword($password):string
+    {
+        return \Yii::$app->security->generatePasswordHash($password);
     }
 }
