@@ -15,14 +15,13 @@ $config = [
         '@npm'   => '@vendor/npm-asset',
     ],
     'modules' => [
-        'auth' => [
-            'class' => 'app\modules\auth\Module',
-        ],
+
     ],
     'components' => [
         'activity'=>['class'=>\app\components\ActivityComponent::class,
         'classModel'=>\app\models\Activity::class],
         'dao'=>['class'=>\app\components\DaoComponent::class],
+        'auth'=>['class'=>\app\components\AuthComponent::class],
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => 'yCt7UZbX7KPxg5ulYCZpaUKXLUVBGqyC',

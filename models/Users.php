@@ -20,11 +20,26 @@ class Users extends UsersBase
 {
     public $password;
 
+    const SCENARIO_SIGNIN = 'signin';
+    const SCENARIO_SIGNUP = 'signup';
+
+    public function scenarionSignin()
+    {
+        $this->setScenario(self::SCENARIO_SIGNIN);
+        return $this;
+    }
+
+    public function scenarioSignup()
+    {
+        $this->setScenario(self::SCENARIO_SIGNUP);
+        return $this;
+    }
+
     public function rules()
     {
         return array_merge([
-            ['password', 'string', 'min' => 5],
-            [['email'], 'unique'],
+            ['password', 'string', 'max' => 5],
+            [['email'], 'unique', 'on' => self::SCENARIO_SIGNUP],
         ], parent::rules());
     }
 }

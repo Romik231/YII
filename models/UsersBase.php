@@ -59,6 +59,6 @@ class UsersBase extends \yii\db\ActiveRecord
      */
     public function getActivities()
     {
-        return $this->hasMany(Activity::className(), ['user_id' => 'id']);
+        return $this->hasMany(Activity::class, ['user_id' => 'id']);
     }
 }
