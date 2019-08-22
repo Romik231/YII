@@ -15,13 +15,13 @@ class m190818_164153_Insert extends Migration
         $this->insert('users',[
             'id'=>1,
             'email'=>'test@email.ru',
-            'password_hash'=>'dsadadd',
+            'password_hash'=>'123456',
         ]);
 
         $this->insert('users',[
             'id'=>2,
             'email'=>'test2@email.ru',
-            'password_hash'=>'fdsfsff',
+            'password_hash'=>'123456',
         ]);
 
         $this->batchInsert('activity',['title','startDate','user_id','useNotification' ],[

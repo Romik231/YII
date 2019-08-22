@@ -20,8 +20,9 @@ class ActivityComponent extends BaseActivityComponent
     public function createActivity(Activity &$activity): bool
     {
         $activity->file=UploadedFile::getInstances($activity, 'file');
+        $activity->user_id=\Yii::$app->user->getId();
 
-        if(!$activity->validate()){
+        if(!$activity->save()){
             return false;
         }
         if($activity->file){

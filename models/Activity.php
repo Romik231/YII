@@ -8,17 +8,17 @@ use app\base\BaseActivityModel;
 use phpDocumentor\Reflection\Types\Self_;
 use yii\base\Model;
 
-class Activity extends BaseActivityModel
+class Activity extends ActivityBase
 {
-    public $title;
-    public $description;
-    public $startDate;
-    public $endDate;
-    public $isBlocked;
-    public $isRepeated;
-    public $useNotification;
-    public $repeatedType;
-    public $email;
+//    public $title;
+//    public $description;
+//    public $startDate;
+//    public $endDate;
+//    public $isBlocked;
+//    public $isRepeated;
+//    public $useNotification;
+//    public $repeatedType;
+//    public $email;
     public $emailRepeat;
     public $file;
 
@@ -42,7 +42,7 @@ class Activity extends BaseActivityModel
 
     public function rules()
     {
-        return [
+        return array_merge([
             ['title', 'trim'],
             ['description', 'trim'],
             ['file','file','extensions'=>['jpg','png'],'maxFiles' => 3],
@@ -55,7 +55,7 @@ class Activity extends BaseActivityModel
             ['repeatedType', 'in', 'range'=>array_keys(self::REPEATED_TYPE)],
             [['startDate', 'endDate'], 'date', 'format'=>'php:Y-m-d'],
             [['isBlocked', 'isRepeated', 'useNotification'],'boolean'],
-        ];
+            ], parent::rules());
     }
 
     public function attributeLabels()
