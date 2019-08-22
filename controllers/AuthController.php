@@ -17,7 +17,7 @@ class AuthController extends Controller
         if (\Yii::$app->request->isPost) {
             $model->load(\Yii::$app->request->post());
             if(\Yii::$app->auth->signin($model)){
-                $this->redirect('activity/create');
+                $this->redirect('/activity/create');
             }
         }
 
@@ -32,7 +32,7 @@ class AuthController extends Controller
         if (\Yii::$app->request->isPost) {
             $model->load(\Yii::$app->request->post());
             if(\Yii::$app->auth->signup($model)){
-                $this->redirect('auth/sign-in');
+                $this->redirect('/auth/sign-in');
             }
         }
 
