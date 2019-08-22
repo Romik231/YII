@@ -18,6 +18,8 @@ $config = [
 
     ],
     'components' => [
+        'rbac'=>['class'=>\app\components\RbacComponent::class],
+        'authManager' => ['class' => 'yii\rbac\DbManager'],
         'activity'=>['class'=>\app\components\ActivityComponent::class,
         'classModel'=>\app\models\Activity::class],
         'dao'=>['class'=>\app\components\DaoComponent::class],

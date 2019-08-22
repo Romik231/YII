@@ -7,6 +7,7 @@ namespace app\controllers\actions;
 use app\base\BaseActivityAction;
 use app\components\ActivityComponent;
 use app\models\Activity;
+use yii\web\HttpException;
 use yii\web\Request;
 use yii\web\Response;
 use yii\widgets\ActiveForm;
@@ -15,6 +16,10 @@ class ActivityCreateAction extends BaseActivityAction
 {
     public function run()
     {
+
+        if (!\Yii::$app->rbac->canCreataActivity()){
+            throw new HttpException('403','Какая-то херня' );
+        }
 //      $model = new Activity();
         $activityComponent = \Yii::createObject(['class' => ActivityComponent::class, 'classModel'=>Activity::class]);
 
