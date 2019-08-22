@@ -14,11 +14,12 @@ class AuthComponent extends Component
     public function signin(Users &$model): bool
     {
         $model->scenarioSignin();
-        if (!$model->validate(['email', 'password'])){
+        if (!$model->validate(['email', 'password'])) {
             return false;
         }
-        $user=$this->getUserByEmail($model->email);
-        if ((!$this->validationPassword($user->password, $model->password_hash))){
+        $user = $this->getUserByEmail($model->email);
+
+        if ((!$this->validationPassword($model->password, $user->password_hash))) {
             $model->addError('password', 'Wrong password');
             return false;
         }
@@ -26,12 +27,14 @@ class AuthComponent extends Component
 
     }
 
-    public function validationPassword($password, $password_hash):bool{
-        return \Yii::$app->security->validatePassword($password,$password_hash);
+    public function validationPassword($password, $password_hash): bool
+    {
+        return \Yii::$app->security->validatePassword($password, $password_hash);
     }
 
-    public function getUserByEmail(string $email): ?Users{
-        return Users::find()->andWhere(['email'=>$email])->one();
+    public function getUserByEmail(string $email): ?Users
+    {
+        return Users::find()->andWhere(['email' => $email])->one();
     }
 
     public function signup(Users &$user): bool
@@ -48,7 +51,7 @@ class AuthComponent extends Component
         return true;
     }
 
-    public function genHashPassword($password):string
+    public function genHashPassword($password): string
     {
         return \Yii::$app->security->generatePasswordHash($password);
     }
