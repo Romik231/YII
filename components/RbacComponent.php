@@ -5,6 +5,8 @@ namespace app\components;
 
 
 use app\base\BaseComponent;
+use app\models\Activity;
+use app\rules\ViewEditOwnerRule;
 
 class RbacComponent extends BaseComponent
 {
@@ -30,6 +32,11 @@ class RbacComponent extends BaseComponent
 
         $viewEditOwnerActivity=$manager->createPermission('viewEditOwnerActivity');
         $viewEditOwnerActivity->description='Просмотри редактирование своего события';
+
+        $rule=new ViewEditOwnerRule();
+        $viewEditOwnerActivity->ruleName=$rule->name;
+        $manager->add($rule);
+
         $manager->add($viewEditOwnerActivity);
 
         $viewEditAll=$manager->createPermission('viewEditAll');
@@ -41,13 +48,24 @@ class RbacComponent extends BaseComponent
         $manager->addChild($admin,$user);
         $manager->addChild($admin, $viewEditAll);
 
-        $manager->assign($admin,3);
-        $manager->assign($user, 4);
+        $manager->assign($admin,7);
+        $manager->assign($user, 3);
         $manager->assign($user, 1);
 
     }
 
     public function canCreataActivity(): bool {
         return \Yii::$app->user->can('createActivity');
+    }
+
+    public function canViewEditAll(Activity $activity){
+        if(\Yii::$app->user->can('viewEditAll')){
+            return true;
+        }
+
+        if (\Yii::$app->user->can('viewEditOwnerActivity',['activity'=>$activity])){
+            return true;
+        }
+        return false;
     }
 }
