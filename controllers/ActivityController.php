@@ -24,6 +24,8 @@ class ActivityController extends BaseActivityController
         if (!\Yii::$app->rbac->canViewEditAll($model)){
             throw new HttpException(403,'Error');
         }
+
+
         return $this->render('info', ['model' => $model]);
     }
 

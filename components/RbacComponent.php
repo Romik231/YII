@@ -48,9 +48,9 @@ class RbacComponent extends BaseComponent
         $manager->addChild($admin,$user);
         $manager->addChild($admin, $viewEditAll);
 
-        $manager->assign($admin,7);
+        $manager->assign($admin,1);
+        $manager->assign($user, 2);
         $manager->assign($user, 3);
-        $manager->assign($user, 1);
 
     }
 
