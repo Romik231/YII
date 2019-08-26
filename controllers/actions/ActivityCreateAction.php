@@ -18,7 +18,7 @@ class ActivityCreateAction extends BaseActivityAction
     {
 
         if (!\Yii::$app->rbac->canCreataActivity()){
-            throw new HttpException('403','Какая-то херня' );
+            throw new HttpException('403','Not auth metod' );
         }
 //      $model = new Activity();
         $activityComponent = \Yii::createObject(['class' => ActivityComponent::class, 'classModel'=>Activity::class]);
@@ -34,7 +34,7 @@ class ActivityCreateAction extends BaseActivityAction
         if(\Yii::$app->request->isPost){
 
             if(\Yii::$app->activity->createActivity($model)){
-                return $this->controller->render('info',['model'=>$model]);
+                return $this->controller->redirect(['/activity/view','id'=>$model->id]);
 
             }else{
 //                print_r($model->getErrors());
