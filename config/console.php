@@ -29,7 +29,7 @@ $config = [
                 'class'=>'Swift_SmtpTransport',
                 'host'=>'smtp.yandex.ru',
                 'username' => 'Romik231@yandex.ru',
-                'password' => '19R14m12K12',
+                'password' => '*********',
                 'port' => '587',
                 'encryption' => 'tls',
                 ],
