@@ -27,9 +27,9 @@ $config = [
             'enableSwiftMailerLogging' => true,
             'transport' => [
                 'class'=>'Swift_SmtpTransport',
-                'host'=>'smtp.yandex.ru',
-                'username' => 'Romik231@yandex.ru',
-                'password' => '*********',
+                'host'=>'smtp.gmail.com',
+                'username' => 'r.spe.m.ctre.k@gmail.com',
+                'password' => '*',
                 'port' => '587',
                 'encryption' => 'tls',
                 ],

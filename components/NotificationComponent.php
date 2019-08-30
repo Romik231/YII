@@ -29,7 +29,7 @@ class NotificationComponent extends Component
     {
         foreach ($activities as $activity) {
             if ($this->mailer->compose('notif', ['model' => $activity])
-                ->setFrom('Romik231@yandex.ru')
+                ->setFrom('r.spe.m.ctre.k@gmail.com')
                 ->setSubject('Событие стартует сегодня')
                 ->setTo($activity->email)
                 ->send()) {
