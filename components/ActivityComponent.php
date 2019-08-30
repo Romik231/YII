@@ -57,4 +57,12 @@ class ActivityComponent extends BaseActivityComponent
         return time().'.'.$uploadedFile->extension;
     }
 
+    public function getActivityUseNotification(){
+        return Activity::find()
+            ->andWhere('createdAt<=:date',[':date'=>date('Y-m-d')])
+            ->andWhere(['useNotification'=>1])
+            ->andWhere('email is not null')
+            ->all();
+    }
+
 }

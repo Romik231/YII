@@ -18,7 +18,7 @@ class DaoComponent extends BaseActivityComponent
     public function getUsers()
     {
         $sql = 'Select * from users;';
-        return $this->getDb()->createCommand($sql)->queryAll();
+        return $this->getDb()->createCommand($sql)->cache(10)->queryAll();
     }
 
     public function getActivityUser($user_id)

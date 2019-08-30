@@ -25,4 +25,20 @@ class DaoController extends BaseActivityController
         return $this->render('dao', ['users'=>$users, 'activityUser'=>$activityUsers,
             'activity'=>$activ, 'count'=>$count, 'reader'=>$reader]);
     }
+
+    public function actionCache(){
+       // $val = 'Я сохранен в кэше';
+
+      //\Yii::$app->cache->set('key',$val);
+
+        $val=\Yii::$app->cache->get('key');
+
+        $val2=\Yii::$app->cache->getOrSet('key2', function (){
+//            return 'value';
+        });
+
+        echo $val2;
+
+        echo $val;
+    }
 }
